@@ -1,18 +1,36 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Coin : MonoBehaviour
 {
+    [SerializeField] private int pointsOnCollect;
+    
+    public delegate void OnPickupEventHandler(int points);
+    public event OnPickupEventHandler OnPickupEvent;
+    
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        
+        if(ScoreKeep.Instance == null)
+        {
+            Debug.LogError($"Error: {nameof(ScoreKeep)} instance not found.");
+            return;
+        }
+
+        OnPickupEvent += ScoreKeep.Instance.AddScore;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnTriggerEnter(Collider other)
     {
+        // no need to check what other is because Coin can only collide with Player.
+        /*if(other.GetComponent<Player>() == null)
+        {
+            return;
+        }*/
         
+        OnPickupEvent.Invoke(pointsOnCollect);
+        Destroy(this.gameObject);
     }
 }

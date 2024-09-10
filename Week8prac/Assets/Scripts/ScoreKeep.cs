@@ -6,30 +6,32 @@ public class ScoreKeep : MonoBehaviour
 {
     // Singleton
     static private ScoreKeep instance;
-    static public ScoreKeep Instance 
+    static public ScoreKeep Instance
     {
-        get 
+        get
         {
-            if (instance == null) 
+            if (instance == null)
             {
-                Debug.LogError("There is not scoreKeeper in the scene.");
-            }            
+                Debug.LogError($"There is no {nameof(ScoreKeep)} in the scene.");
+            }
             return instance;
         }
-        set
+        private set
         {
-            if (instance == null) 
+            if (instance == null)
             {
                 instance = value;
             }
             else
             {
+                Debug.LogWarning(
+                    $"There is already a {nameof(ScoreKeep)} in the scene, destroying new.");
                 Destroy(value);
-            }            
+            }
         }
     }
-    
-    private int score; 
+
+    private int score;
     public int Score
     {
         get
@@ -37,18 +39,15 @@ public class ScoreKeep : MonoBehaviour
             return score;
         }
     }
-  
-    public delegate void OnPickup(int point);
-    public OnPickup OnPickupEvent;
-    
-    private void AddScore(int point)
+
+    public void AddScore(int point)
     {
-        score+=point;
+        score += point;
     }
 
+    // Awake is called once the instance is created
     private void Awake()
     {
-        Instance = this; 
-        OnPickupEvent = AddScore;
+        Instance = this;
     }
 }
