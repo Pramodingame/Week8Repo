@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ScoreKeep : MonoBehaviour
 {
-     // Singleton
+    // Singleton
     static private ScoreKeep instance;
     static public ScoreKeep Instance 
     {
@@ -38,27 +38,17 @@ public class ScoreKeep : MonoBehaviour
         }
     }
   
-
     public delegate void OnPickup(int point);
     public OnPickup OnPickupEvent;
-
-
-
     
-    void AddScore(int point)
+    private void AddScore(int point)
     {
         score+=point;
     }
 
-    void Awake()
+    private void Awake()
     {
         Instance = this; 
         OnPickupEvent = AddScore;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }
