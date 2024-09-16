@@ -24,6 +24,7 @@ public class Coin : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        // The codes from line 28 - 32 seems obselte since they been commented. Maybe consider removal of it ?
         // no need to check what other is because Coin can only collide with Player.
         /*if(other.GetComponent<Player>() == null)
         {

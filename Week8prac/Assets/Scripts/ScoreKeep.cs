@@ -30,7 +30,7 @@ public class ScoreKeep : MonoBehaviour
             }
         }
     }
-
+    //Block of code from line 34 - 41 appears to be a getter for score. Perhaps rename it to something such as 'getScore' ?
     private int score;
     public int Score
     {
