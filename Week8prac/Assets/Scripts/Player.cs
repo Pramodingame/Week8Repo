@@ -11,6 +11,7 @@ public class Player : MonoBehaviour
 
     private PlayerActions playerActions;
     private InputAction moveAction;
+    [SerializeField] private bool player2Controls = false;
 
     private void OnEnable()
     {
@@ -26,7 +27,14 @@ public class Player : MonoBehaviour
     private void Awake()
     {
         playerActions = new PlayerActions();
-        moveAction = playerActions.playerControls.move;
+        if(player2Controls)
+        {
+            moveAction = playerActions.playerControls.move2;
+        }
+        else
+        {
+            moveAction = playerActions.playerControls.move1;
+        }
     }
 
     // Update is called once per frame
